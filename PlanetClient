@@ -1,0 +1,64 @@
+import java.io.*;				    //Needed to read files
+import java.util.Scanner;		//Needed for scanner class
+
+
+/**
+ *  * This program evaluates extrasolar planets and allows the user to
+ * view and modify their data.
+ * @author Kendra Evans
+ *
+ */
+public class planetClient {
+	String name;		  //The planet name
+	double radius;		//The radius of the planet
+	double flux;		  //The planets stellar flux
+	double distance;	//Distance from earth
+	
+	//Create an array of PlanetData objects
+	final int NUM_EMPLOYEES = 10;
+	PlanetData [] list = new PlanetData[NUM_EMPLOYEES];
+	
+	//Write algorithm to print all the objects in the array first
+	//(PlanetData toString() to display the information for each planet
+	
+	//readFile method - read contents of PlanetData.txt into array of 10 objects
+	public  readFile throws IOException {
+	//Open the file
+	PrintWriter outputFile = new PrintWriter("PlanetData.txt");
+	
+	for (int index = 0; index < PlanetData.length; index ++) {
+		outputFile.println(PlanetData[index]);
+		}
+	//Return the array
+	return 
+	//displayMenu method - offer user menu of choices
+		public
+	//Get valid choice from user
+	//Return the choice
+	//Put the functionality to display the planets into a method
+	//Pass the array into this method
+	
+	//changeRadius method
+	public void setRadius(double rad) {
+		if () {
+			radius = rad;
+		}
+	}
+	//changeFlux method
+	public void setFlux(double stellarFlux) {
+		if () {
+			flux = stellarFlux;
+		}
+	}
+	//showAll method
+	
+	//showMostSimilar method
+	
+	//showLeastSimilar method
+	
+	//showAverageSimilarity method
+
+	//PRIVATE pickPlanet method - takes array of PlanetData as a parameter
+	//User selects a planet
+	//Return selected object
+}
