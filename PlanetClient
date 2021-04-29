@@ -1,149 +1,46 @@
-package programmingAssignmentThree;
 import java.io.*;				//Needed to read files
 import java.util.Scanner;		//Needed for scanner class
 
 
-/**
- *  * This program evaluates extrasolar planets and allows the user to
- * view and modify their data.
- * @author Kendra Evans
- *
- */
 public class planetClient {
-	
-	public static void main(String[] args) {
 
-	String name;		//The planet name
-	double radius;		//The radius of the planet
-	double flux;		//The planets stellar flux
-	double distance;	//Distance from earth
-	
-	//Create an array of PlanetData objects
-	final int NUM_PLANETS = 10;							//Number of planets		
-	PlanetData [] list = new PlanetData[NUM_PLANETS];	//Create an array that references PlanetData objects
-	
-	//Write algorithm to print all the objects in the array first
-	//(PlanetData toString() to display the information for each planet
-	
-	//readFile method - read contents of PlanetData.txt into array of 10 objects
-	public readFile throws IOException {
+	public static void main(String[] args) throws FileNotFoundException {
+		String name = "poop";
+		double radius = 10;
+		double flux = 30;
+		double distance = 50;
+		final int NUM_PLANETS = 10;
 		
-	//Open the file
-		File file = new File(PlanetData.txt);
-		Scanner inputFile = new Scanner(file);
-	//Scan through the file and assign each line to a variable
-		for(int index = 0; index < NUM_PLANETS; index++) {
-			String name = inputFile.nextLine();
-			double radius = inputFile.nextDouble();
-			double flux = inputFile.nextDouble();
-			double distance = inputFile.nextDouble();
-			list[index] = new PlanetData();
-			list[index].setModel(name);
-			list[index].setModel(radius);
-			list[index].setModel(flux);
-			list[index].setModel(distance);
+		PlanetData[] list = new PlanetData[NUM_PLANETS];
+		
+		for (int index = 0; index < NUM_PLANETS; index++) {
+			list[index] = new PlanetData(name, radius, flux, distance);
+			System.out.println("Test" + (index +1) + (list[index].getRadius()));
+		}
 	}
-	
-	
-	
-	
-	for (int index = 0; index < PlanetData.length; index ++) {
 		
-	//Return the array
-	return 
+	//readFile method
+	public PlanetData readFile(String name, double radius, double flux, double distance) throws IOException {
+			File file = new File("C:\\Users\\ddmca\\Downloads\\Programming Assignment 3(2).zip\\Programming Assignment 3\\PlanetData.txt\\");
+			Scanner sc = new Scanner(file);
 			
-			
-			
-	/**
-	 * This method displays a menu of choices, displays the proper
-	 * result for each choice, and returns the choice
-	*/
+			for (int index = 0; index < 10; index++) {
+				while(sc.hasNextLine()) {
+					name = sc.nextLine();
+					radius = sc.nextDouble();
+					flux = sc.nextDouble();
+					distance = sc.nextDouble();
+				}
+			}
+			return PlanetData;
+	
+		}
+	
+	//displayMenu method
 	public int displayMenu() {
-	
-	//Create Scanner object for keyboard input
-		Scanner keyboard = new Scanner(System.in);
-		
-	//Print the menu
-		System.out.println("Planetary Conditions Data Menu\n1.  List all planetary data" +
-							"\n2.  Change radius\n3.  Change flux\n4.  Show planet with highest" +
-							"ESI\n5.  Show planet with lowest ESI\n6.  Show average ESI of planets in" +
-							" the data file\n7.  Quit");
-	//Get valid choice from user
-		int choice = keyboard.nextInt();
-		if (choice > 0 && choice < 7) {
-			switch (choice) {				
-				case 1:
-					showAll;
-					break;
-				case 2:
-					System.out.printf("Select a planet:\n1." +);
-					System.out.println("Which planet? (1-10");
-					pickPlanet;
-					System.out.printf("Current planetary radius: %d\nPlease enter the new radius: ", radius);
-					radius = keyboard.nextDouble();
-					setRadius;
-					System.out.printf("Name:     %s\nPlanetary Radius:            %d");
-					break;
-				case 3:
-					System.out.printf("Current stellar flux: %f", flux);
-					System.out.println("Please enter the new flux: ");
-					flux = keyboard.nextDouble();
-					setFlux;
-					System.out.printf("Name:     %s\nPlanetary Radius:            %d");
-					break;
-				case 4:
-					System.out.println("The planet with the greatest Earth similarity is: ");
-					showMostSimilar;
-					break;
-				case 5:
-					System.out.println("The planet with the lowest Earth similarity index is: ");
-					showLeastSimilar;
-					break;
-				case 6:
-					System.out.print("The average Earth similarity index of planets in the data is: ");
-					showAverageSimilarity;
-					break;
-					}
-		else {
-			System.out.println("Your choice: ");
-			choice = keyboard.nextInt();
-		}
-			//Return the choice
-	return choice;
-	}
-	
-	//Put the functionality to display the planets into a method
-	//Pass the array into this method
-	
-	//changeRadius method
-	public double changeRadius(double rad) {
-		
-			radius = rad;
-		}
-	}
-	//changeFlux method
-	public void setFlux(double stellarFlux) {
-		if () {
-			flux = stellarFlux;
-		}
-	}
-	//showAll method
-	public void showAll(String name, double radius, double flux, double distance) {
-	for (int index = 0; index < NUM_PLANETS; index++) {
-			System.out.println("Name:\t\t\t" + list[index].getName());
-			System.out.println("Planetary Radius:\t\t" + list[index].getRadius());
-			System.out.println("Earth Similarity Index:\t\t" + list[index].getEsi());
-			System.out.println("Stellar Flux:\t\t" + list[index].getFlux());
-			System.out.println("Distance from Earth:\t\t\n" + list[index].getDistance());
+		int choice;
+		Scanner sc = new Scanner(System.in);
+		return choice;
 		
 	}
-	//showMostSimilar method
-	
-	//showLeastSimilar method
-	
-	//showAverageSimilarity method
-
-	//PRIVATE pickPlanet method - takes array of PlanetData as a parameter
-	//User selects a planet
-	//Return selected object
 }
