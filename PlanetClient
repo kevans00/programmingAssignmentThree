@@ -20,8 +20,7 @@ public class planetClient {
 	}
 		
 	//readFile method
-	public PlanetData readFile(PlanetData[] array) throws IOException {
-		final int NUM_PLANETS = 10;
+	private static void readFile(PlanetData[] array) throws IOException {
 		String name;
 		double radius;
 		double flux;
@@ -39,15 +38,10 @@ public class planetClient {
 				
 				array[index] = new PlanetData(name, radius, flux, distance);
 			}
+			
 		}
 	}
 
-
-	
-	
-
-	
-	
 	//displayMenu method
 	public int displayMenu(PlanetData list) {
 		int choice;
@@ -63,6 +57,7 @@ public class planetClient {
 		//Get valid choice from user
 		choice = sc.nextInt();
 		
+		//Switch statement for each valid choice option
 		if(choice != 7) {
 			if (choice > 0 && choice <= 6) {
 				switch (choice) {				
@@ -70,9 +65,9 @@ public class planetClient {
 						showAll(list);
 						break;
 					case 2:
-						System.out.printf("Select a planet:\n1." +);
-						System.out.println("Which planet? (1-10");
-						pickPlanet;
+						pickPlanet();
+						
+						
 						System.out.printf("Current planetary radius: %d\nPlease enter the new radius: ", radius);
 						radius = keyboard.nextDouble();
 						setRadius;
@@ -101,13 +96,60 @@ public class planetClient {
 				}
 			else {
 				System.out.println("Your choice: ");
-				choice = keyboard.nextInt();
+				choice = sc.nextInt();
 			}
+		else {
+			
+		}
 		return choice;
 		
 			}
 	}
-	private int pickPlanet (PlanetData[] array) {
-		System.out.println("Select a planet:\n1." + array.getName([0]) + "\n2." + array[1] + "\n3." + array[2]);
-}
+	
+	public int pickPlanet (PlanetData[] array) {
+		
+		//Create a scanner object for keyboard input
+		Scanner sc = new Scanner(System.in);
+		//Display the planet menu
+		System.out.println("Select a planet:\n1." + array[0].getName() + "\n2." + array[1].getName() + "\n3." + array[2].getName()  +
+				"\n4." + array[3].getName() + "\n5." + array[4].getName() + "\n6." + array[5].getName() + "\n7." + array[6].getName() + "\n8." + array[7].getName() +
+				"\n9." + array[8].getName() + "\n10." + array[9].getName() + "\nWhich planet? (1-10): ");
+		//Get planet choice from user
+		int planetChoice = sc.nextInt();
+		//Return the planet choice
+		return planetChoice;
+			}
+		
+		
+	public double changeFlux(PlanetData[] array, int planetChoice) {
+		
+		//Create a scanner object for keyboard input	
+		Scanner sc = new Scanner(System.in);
+		//Display current stellar flux
+		System.out.printf("Current stellar flux: ", array[planetChoice].getFlux());
+		//Get new flux from user
+		System.out.println("Please enter the new flux: ");
+		array[flux] = sc.nextDouble();
+		
+		
+			}
+	
+	public PlanetData[] changeRadius(PlanetData[] array, int planetChoice) {
+		
+	
+		//Create a scanner object for keyboard input	
+		Scanner sc = new Scanner(System.in);
+		//Display current radius
+		System.out.printf("Current radius: ", array[planetChoice].getRadius());
+		//Get new radius from user
+		System.out.println("Please enter the new radius: ");
+		array[planetChoice] = sc.nextScan();
+		
+	}
+	
+	public  showMostSimilar(PlanetData[] array) {
+
+	
+	
+	
 	
