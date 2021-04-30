@@ -1,5 +1,5 @@
 import java.io.*;				//Needed to read files
-import java.util.Scanner;		//Needed for scanner class
+import java.util.Scanner;    	//Needed for scanner class
 
 
 public class planetClient {
@@ -20,27 +20,94 @@ public class planetClient {
 	}
 		
 	//readFile method
-	public PlanetData readFile(String name, double radius, double flux, double distance) throws IOException {
-			File file = new File("C:\\Users\\ddmca\\Downloads\\Programming Assignment 3(2).zip\\Programming Assignment 3\\PlanetData.txt\\");
-			Scanner sc = new Scanner(file);
-			
-			for (int index = 0; index < 10; index++) {
-				while(sc.hasNextLine()) {
-					name = sc.nextLine();
-					radius = sc.nextDouble();
-					flux = sc.nextDouble();
-					distance = sc.nextDouble();
-				}
+	public PlanetData readFile(PlanetData[] array) throws IOException {
+		final int NUM_PLANETS = 10;
+		String name;
+		double radius;
+		double flux;
+		double distance;
+		
+		File file = new File("C:\\Users\\ddmca\\Downloads\\Programming Assignment 3(2).zip\\Programming Assignment 3\\PlanetData.txt\\");
+		Scanner sc = new Scanner(file);
+		
+		for (int index = 0; index < 10; index++) {
+			while(sc.hasNextLine()) {
+				name = sc.nextLine();
+				radius = sc.nextDouble();
+				flux = sc.nextDouble();
+				distance = sc.nextDouble();
+				
+				array[index] = new PlanetData(name, radius, flux, distance);
 			}
-			return PlanetData;
-	
 		}
+	}
+
+
+	
+	
+
+	
 	
 	//displayMenu method
-	public int displayMenu() {
+	public int displayMenu(PlanetData list) {
 		int choice;
+		
+		//Create scanner object for keyboard input
 		Scanner sc = new Scanner(System.in);
+		//Print out the table
+		System.out.println("Planetary Conditions Data Menu\n1.  List all planetary data" +
+				"\n2.  Change radius\n3.  Change flux\n4.  Show planet with highest" +
+				"ESI\n5.  Show planet with lowest ESI\n6.  Show average ESI of planets in" +
+				" the data file\n7.  Quit\n");
+		
+		//Get valid choice from user
+		choice = sc.nextInt();
+		
+		if(choice != 7) {
+			if (choice > 0 && choice <= 6) {
+				switch (choice) {				
+					case 1:
+						showAll(list);
+						break;
+					case 2:
+						System.out.printf("Select a planet:\n1." +);
+						System.out.println("Which planet? (1-10");
+						pickPlanet;
+						System.out.printf("Current planetary radius: %d\nPlease enter the new radius: ", radius);
+						radius = keyboard.nextDouble();
+						setRadius;
+						System.out.printf("Name:     %s\nPlanetary Radius:            %d");
+						break;
+					case 3:
+						System.out.printf("Current stellar flux: %f", flux);
+						System.out.println("Please enter the new flux: ");
+						flux = keyboard.nextDouble();
+						setFlux;
+						System.out.printf("Name:     %s\nPlanetary Radius:            %d");
+						break;
+					case 4:
+						System.out.println("The planet with the greatest Earth similarity is: ");
+						showMostSimilar;
+						break;
+					case 5:
+						System.out.println("The planet with the lowest Earth similarity index is: ");
+						showLeastSimilar;
+						break;
+					case 6:
+						System.out.print("The average Earth similarity index of planets in the data is: ");
+						showAverageSimilarity;
+						break;
+						}
+				}
+			else {
+				System.out.println("Your choice: ");
+				choice = keyboard.nextInt();
+			}
 		return choice;
 		
+			}
 	}
+	private int pickPlanet (PlanetData[] array) {
+		System.out.println("Select a planet:\n1." + array.getName([0]) + "\n2." + array[1] + "\n3." + array[2]);
 }
+	
