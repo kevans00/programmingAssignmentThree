@@ -20,22 +20,34 @@ public class planetClient {
 	}
 		
 	//readFile method
+	/**
+	 * This method reads each line of a file and assigns
+	 * each variable within the PlanetData array to a value
+	 * written in the corresponding line of the file
+	 * @param array The original PlanetData array
+	 * @throws IOException In case the file cannot be found
+	 */
 	private static void readFile(PlanetData[] array) throws IOException {
-		String name;
-		double radius;
-		double flux;
-		double distance;
+		String name;			//The planet name
+		double radius;			//The planet radius
+		double flux;			//The planet flux
+		double distance;		//The planets distance from Earth
 		
+		//Open file
 		File file = new File("C:\\Users\\ddmca\\Downloads\\Programming Assignment 3(2).zip\\Programming Assignment 3\\PlanetData.txt\\");
+		
+		//Create scanner for file
 		Scanner sc = new Scanner(file);
 		
+		//Create loop to store variables written on each line
 		for (int index = 0; index < 10; index++) {
 			while(sc.hasNextLine()) {
 				name = sc.nextLine();
 				radius = sc.nextDouble();
 				flux = sc.nextDouble();
 				distance = sc.nextDouble();
-				
+			
+		//Create the planet data
 				array[index] = new PlanetData(name, radius, flux, distance);
 			}
 			
@@ -43,7 +55,14 @@ public class planetClient {
 	}
 
 	//displayMenu method
-	public int displayMenu(PlanetData list) {
+	/**
+	 * This method displays a menu of user options to 
+	 * display the PlanetData array, parts of it, or modify
+	 * the variable data
+	 * @param list The original PlanetData array
+	 * @return The users menu choice
+	 */
+	public int displayMenu(PlanetData[] array int planetChoice) {
 		int choice;
 		
 		//Create scanner object for keyboard input
@@ -62,16 +81,13 @@ public class planetClient {
 			if (choice > 0 && choice <= 6) {
 				switch (choice) {				
 					case 1:
-						showAll(list);
+						showAll(array);
 						break;
 					case 2:
-						pickPlanet();
+						changeRadius(array, planetChoice);
 						
 						
-						System.out.printf("Current planetary radius: %d\nPlease enter the new radius: ", radius);
-						radius = keyboard.nextDouble();
-						setRadius;
-						System.out.printf("Name:     %s\nPlanetary Radius:            %d");
+						
 						break;
 					case 3:
 						System.out.printf("Current stellar flux: %f", flux);
@@ -105,8 +121,14 @@ public class planetClient {
 		
 			}
 	}
-	
-	public int pickPlanet (PlanetData[] array) {
+	//pickPlanet method
+	/**
+	 * This method presents a list of planets in the array
+	 * and allows them to select which planet to modify
+	 * @param array The original PlanetData array
+	 * @return The planetChoice that they would like to modify
+	 */
+	private static int pickPlanet (PlanetData[] array) {
 		
 		//Create a scanner object for keyboard input
 		Scanner sc = new Scanner(System.in);
@@ -117,39 +139,200 @@ public class planetClient {
 		//Get planet choice from user
 		int planetChoice = sc.nextInt();
 		//Return the planet choice
+		if (planetChoice < 0 && planetChoice > 10) {
+			System.out.println("Which planet? (1-10)");
+			planetChoice = sc.nextInt();
+		}
 		return planetChoice;
-			}
+	}
 		
-		
-	public double changeFlux(PlanetData[] array, int planetChoice) {
+	//changeFlux method
+	/**
+	 * This method presents the user with the current planets
+	 * Stellar Flux, allows them to change it, and presents a 
+	 * table of the planets new data
+	 * @param array The original PlanetData array
+	 * @param planetChoice The chosen planet to modify
+	 * @return The new flux given by the user
+	 */
+	public static void changeFlux(PlanetData[] array, int planetChoice) {
 		
 		//Create a scanner object for keyboard input	
 		Scanner sc = new Scanner(System.in);
+		//Prompt the user to pick a planet
+		pickPlanet(array);
 		//Display current stellar flux
 		System.out.printf("Current stellar flux: ", array[planetChoice].getFlux());
 		//Get new flux from user
 		System.out.println("Please enter the new flux: ");
-		array[flux] = sc.nextDouble();
-		
-		
+		double newFlux = sc.nextDouble();
+		//Assign new radius to chosen planet
+		array[planetChoice].setFlux(newFlux);
+		//Print planet data table
+		System.out.println("Name:\t\t" + array[planetChoice].getName() + "\nPlanetary Radius:\t\t" +
+				array[planetChoice].getRadius() + "\nStellar Flux:\t\t" + array[planetChoice].getFlux() +
+				"\nEarth Similarity Index:\t\t" + array[planetChoice].getEsi() + "\nDistance from Earth:\t\t" +
+				array[planetChoice].getDistance());
+		 
 			}
-	
-	public PlanetData[] changeRadius(PlanetData[] array, int planetChoice) {
-		
-	
+	//changeRadius method
+	/**
+	 * This method presents the user with the current planets
+	 * Radius, allows them to change it, and presents a table of the
+	 * planets new data
+	 * @param array The original PlanetData array
+	 * @param planetChoice The chosen planet to modify
+	 * @return The new radius given by the user
+	 */
+	public static void changeRadius(PlanetData[] array, int planetChoice) {
+		String name;				//The chosen planet name
+		double radius;				//The chosen planet radius
+		double flux;				//The chosen planet flux
+		double Esi;					//The chosen planet Esi
+		double distance;			//The chosen planet distance
 		//Create a scanner object for keyboard input	
 		Scanner sc = new Scanner(System.in);
+		//Prompt the user to pick a planet
+		pickPlanet(array);
+		//Get the information from the chosen planet
+		name = array[planetChoice].getName();
+		radius = array[planetChoice].getRadius();
+		flux = array[planetChoice].getFlux();
+		Esi = array[planetChoice].getEsi();
+		distance = array[planetChoice].getDistance();
 		//Display current radius
-		System.out.printf("Current radius: ", array[planetChoice].getRadius());
+		System.out.printf("Current radius: ", radius);
 		//Get new radius from user
 		System.out.println("Please enter the new radius: ");
-		array[planetChoice] = sc.nextScan();
+		double newRadius = sc.nextDouble();
+		//Assign new radius to the chosen planet
+		array[planetChoice].setRadius(newRadius);
+		//Print planet data table
+		System.out.println("Name:\t\t" + name + "\nPlanetary Radius:\t\t" + radius +
+							"\nStellar Flux:\t\t" + flux + "\nEarth Similarity Index:\t\t" + array[planetChoice].getEsi() + "\nDistance from Earth:\t\t" +
+							array[planetChoice].getDistance()); 
+		}
+
+	//showMostSimilar method
+	/**
+	 * This method collects each planets Esi, determines
+	 * the planet with the maximum Esi, stores its information,
+	 * and presents a table of information to the user
+	 * @param array The original PlanetData array
+	 */
+	public static void  showMostSimilar(PlanetData[] array) {
+		String maxName = null;				//The name of the max planet
+		double maxRadius = 0.0;				//The radius of the max planet
+		double maxFlux = 0.0;				//The flux of the max planet
+		double maxDistance = 0.0;			//The distance of the max planet
+		double Esi;							//The Esi of each planet in the array
+		double maxEsi = 0.0;				//The planet with the highest Esi
+		double min = 2000000000.0;			//The planet with the lowest Esi
+				
+		//Loop each planets Esi
+		for (int index = 0; index < 10; index++) {
+			Esi = array[index].getEsi();
+		//Test for min and max
+			if (Esi < min) {
+				min = Esi;
+			}
+		//Store the largest planets information
+			if (Esi > maxEsi) {
+				maxEsi = Esi;
+				maxName = array[index].getName();
+				maxRadius = array[index].getRadius();
+				maxFlux = array[index].getFlux();
+				maxDistance = array[index].getDistance(); 
+				}
+		}
+		//Print the table
+		System.out.println("The planet with the greatest Earth Similarity index is:\nName:\t\t:"+ maxName + "\nPlanetary Radius:\t\t" +
+		maxRadius + "\nStellar Flux:\t\t" + maxFlux + "\nEarth Similarity Index:\t\t" + maxEsi + "\nDistance from Earth\t\t" + maxDistance);
+		}
+		
+	//showLeastSimilar method
+	/**
+	 * This method collects each planets Esi, determines
+	 * the planet with the minimum Esi, stores its information,
+	 * and presents a table of information to the user
+	 * @param array The original PlanetData array
+	 */
+	public static void showLeastSimilar(PlanetData[] array) {
+		String minName = null;				//The name of the min planet
+		double minRadius = 0.0;				//The radius of the min planet
+		double minFlux = 0.0;				//The flux of the min planet
+		double minDistance = 0.0;			//The distance of the min planet
+		double Esi;							//The Esi of each planet in the array
+		double max = 0.0;					//The planet with the highest Esi
+		double minEsi = 2000000000.0;		//The planet with the lowest Esi
+				
+		//Loop each planets Esi
+		for (int index = 0; index < 10; index++) {
+			Esi = array[index].getEsi();
+		//Test for min and max
+			if (Esi > max) {
+				max = Esi;
+			}
+		//Store the smallest planets information
+			if (Esi < minEsi) {
+				minEsi = Esi;
+				minName = array[index].getName();
+				minRadius = array[index].getRadius();
+				minFlux = array[index].getFlux();
+				minDistance = array[index].getDistance(); 
+				}
+		}
+		//Print the table
+		System.out.println("The planet with the lowest Earth Similarity index is:\nName:\t\t:"+ minName + "\nPlanetary Radius:\t\t" +
+		minRadius + "\nStellar Flux:\t\t" + minFlux + "\nEarth Similarity Index:\t\t" + minEsi + "\nDistance from Earth\t\t" + minDistance);
+		}
+		
+	//showAverageSimilarity method
+	/**
+	 * This method collects each planets Esi, adds the values,
+	 * then calculates the average Esi of all the planets in the array
+	 * @param array The original PlanetData array
+	 */
+	public static void showAverageSimilarity(PlanetData[] array) {
+		double Esi;
+		double sumEsi = 0.0;
+		double average;
+		
+		//Loop each planets Esi
+		for (int index = 0; index < 10; index++) {
+			Esi = array[index].getEsi();
+		//Store each Esi into the sum
+			sumEsi += Esi;
+			}
+		//Calculate the average
+		average = (sumEsi / 10);
+		//Print the average
+		System.out.println("The average Earth Similarity index of planets in the data file is:" + average);
+		}
+	
+	//showAll method
+	/**
+	 * This method gets information about each planet
+	 * and prints it into a chart
+	 * @param array The original PlanetData array
+	 */
+	public static void showAll(PlanetData[] array) {
+		String name;
+		double radius;
+		double flux;
+		double Esi;
+		double distance;
+		
+		for (int index = 0; index < 10; index++) {
+			name = array[index].getName();
+			radius = array[index].getRadius();
+			flux = array[index].getFlux();
+			Esi = array[index].getEsi();
+			distance = array[index].getDistance();
+			System.out.println("Name:\t\t" + name + "\nPlanetary Radius:\t\t" + radius + 
+								"\nStellar Flux:\t\t" + flux + "\nEarth Similarity Index:\t\t" +
+								Esi + "\nDistance from Earth:\t\t" + distance);
+			}
+		}
 		
 	}
-	
-	public  showMostSimilar(PlanetData[] array) {
-
-	
-	
-	
-	
